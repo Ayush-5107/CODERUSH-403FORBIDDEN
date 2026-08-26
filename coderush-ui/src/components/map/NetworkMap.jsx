@@ -256,9 +256,10 @@ export default function NetworkMap({ hospitals = [], ambulances = [], selectedRe
                 : straightLine.length >= 2 ? 'fallback'
                     : 'idle'
 
-    // Final rendered coordinates
-    const displayPickupCoords = realPickupCoords.length >= 2 ? realPickupCoords : generateSmoothCurve(pickupCoords)
-    const displayDeliveryCoords = realDeliveryCoords.length >= 2 ? realDeliveryCoords : generateSmoothCurve(deliveryCoords)
+    // Final rendered coordinates: Use graph route immediately, and update with snapped road route when ready
+    const displayPickupCoords = realPickupCoords.length >= 2 ? realPickupCoords : (pickupCoords.length >= 2 ? pickupCoords : generateSmoothCurve(pickupCoords))
+    const displayDeliveryCoords = realDeliveryCoords.length >= 2 ? realDeliveryCoords : (deliveryCoords.length >= 2 ? deliveryCoords : generateSmoothCurve(deliveryCoords))
+
 
     // Initialise MapLibre
     useEffect(() => {
