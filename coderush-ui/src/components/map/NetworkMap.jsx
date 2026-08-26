@@ -328,7 +328,7 @@ export default function NetworkMap({ hospitals = [], ambulances = [], selectedRe
                 }
             })
 
-            // 2. Pickup Layers (Ambulance -> Patient): Rendered on top with parallel line-offset & animated dashed flow
+            // 2. Pickup Layers (Ambulance -> Patient): Rendered on top with bright amber glow
             map.addLayer({
                 id: 'pickup-glow',
                 type: 'line',
@@ -337,9 +337,8 @@ export default function NetworkMap({ hospitals = [], ambulances = [], selectedRe
                 paint: {
                     'line-color': COLOR_PICKUP,
                     'line-width': 10,
-                    'line-opacity': 0.35,
-                    'line-blur': 5,
-                    'line-offset': -3.5,
+                    'line-opacity': 0.45,
+                    'line-blur': 4,
                 }
             })
             map.addLayer({
@@ -351,7 +350,6 @@ export default function NetworkMap({ hospitals = [], ambulances = [], selectedRe
                     'line-color': '#78350F',
                     'line-width': 5,
                     'line-opacity': 0.9,
-                    'line-offset': -3.5,
                 }
             })
             map.addLayer({
@@ -361,11 +359,10 @@ export default function NetworkMap({ hospitals = [], ambulances = [], selectedRe
                 layout: { 'line-join': 'round', 'line-cap': 'round' },
                 paint: {
                     'line-color': COLOR_PICKUP,
-                    'line-width': 3,
-                    'line-dasharray': [2, 2],
-                    'line-offset': -3.5,
+                    'line-width': 3.5,
                 }
             })
+
 
             // Fallback Layer
             map.addLayer({
