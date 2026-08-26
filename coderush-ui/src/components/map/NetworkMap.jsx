@@ -547,10 +547,84 @@ function normalizeCoords(coords) {
         },
     }[selectedRequest && !selectedResult ? 'evaluating' : routeStatus]
 
+    // Screen projection SVG route overlay for 100% rendering reliability across browser/tile limits
+    const [svgPaths, setSvgPaths] = useState({ pickup: '', delivery: '', fallback: '' })
+
+    useEffect(() => {
+        const map = mapRef.current
+        if (!map || !mapInstance) return
+
+        const updateSvg = () => {
+            const toSvgPath = (coords) => {
+                if (!coords || coords.length < 2) return ''
+                return coords.map((c, i) => {
+                    const pt = map.project(c)
+                    return `${i === 0 ? 'M' : 'L'} ${pt.x.toFixed(1)} ${pt.y.toFixed(1)}`
+                }).join(' ')
+            }
+
+            setSvgPaths({
+                pickup: toSvgPath(displayPickupCoords),
+                delivery: toSvgPath(displayDeliveryCoords),
+                fallback: toSvgPath(!hasGraphRoute ? straightLine : []),
+            })
+        }
+
+        updateSvg()
+        map.on('render', updateSvg)
+        map.on('move', updateSvg)
+        map.on('zoom', updateSvg)
+        return () => {
+            map.off('render', updateSvg)
+            map.off('move', updateSvg)
+            map.off('zoom', updateSvg)
+        }
+    }, [mapInstance, displayPickupCoords, displayDeliveryCoords, straightLine, hasGraphRoute])
+
     return (
         <div className="relative flex-1 rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-zinc-950" style={{ minHeight: '420px' }}>
             {/* MapLibre canvas */}
             <div ref={mapContainer} className="absolute inset-0" />
+
+            {/* Direct Screen Projection SVG Overlay for Guaranteed Visual Fidelity */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
+                {svgPaths.delivery && (
+                    <path
+                        d={svgPaths.delivery}
+                        fill="none"
+                        stroke="#10b981"
+                        strokeWidth="5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        style={{ filter: 'drop-shadow(0px 0px 8px rgba(16, 185, 129, 0.9))' }}
+                    />
+                )}
+                {svgPaths.pickup && (
+                    <path
+                        d={svgPaths.pickup}
+                        fill="none"
+                        stroke="#f59e0b"
+                        strokeWidth="5"
+                        strokeDasharray="8 6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        style={{ filter: 'drop-shadow(0px 0px 10px rgba(245, 158, 11, 0.95))' }}
+                    />
+                )}
+                {svgPaths.fallback && (
+                    <path
+                        d={svgPaths.fallback}
+                        fill="none"
+                        stroke="#06b6d4"
+                        strokeWidth="4"
+                        strokeDasharray="6 4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        style={{ filter: 'drop-shadow(0px 0px 6px rgba(6, 182, 212, 0.8))' }}
+                    />
+                )}
+            </svg>
+
 
             {/* Map Action Controls: Recenter/Focus Route & Maximize/Minimize */}
             <div className="absolute top-3 right-3 z-20 flex items-center gap-2">
