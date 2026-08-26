@@ -101,9 +101,29 @@ def _plan_to_result(plan, request_dict: dict) -> dict:
 
     pickup_coords   = to_lnglat(plan.geojson_pickup_route)
     delivery_coords = to_lnglat(plan.geojson_delivery_route)
-    full_route      = pickup_coords + delivery_coords[1:]  # stitch; skip duplicate patient node
+
+    # Ensure at least 2 coordinates per leg so MapLibre GL LineString can draw them
+    patient_pt = [request_dict["lng"], request_dict["lat"]]
+    if len(pickup_coords) == 1:
+        pickup_coords.append(patient_pt)
+    elif len(pickup_coords) == 0:
+        ambo = orchestrator.ambulances.get(plan.assigned_ambulance_id)
+        ambo_pt = [ambo.lng, ambo.lat] if ambo else patient_pt
+        pickup_coords = [ambo_pt, patient_pt]
+
+    if len(delivery_coords) == 1:
+        hosp = orchestrator.hospitals.get(plan.target_hospital_id)
+        hosp_pt = [hosp.lng, hosp.lat] if hosp else patient_pt
+        delivery_coords.append(hosp_pt)
+    elif len(delivery_coords) == 0:
+        hosp = orchestrator.hospitals.get(plan.target_hospital_id)
+        hosp_pt = [hosp.lng, hosp.lat] if hosp else patient_pt
+        delivery_coords = [patient_pt, hosp_pt]
+
+    full_route = pickup_coords + delivery_coords[1:]  # stitch; skip duplicate patient node
 
     ambo = orchestrator.ambulances[plan.assigned_ambulance_id]
+
 
     return {
         "requestId":          plan.request_id,
