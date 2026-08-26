@@ -95,9 +95,19 @@ def _build_medicine_stock() -> list:
 
 def _plan_to_result(plan, request_dict: dict) -> dict:
     """Convert DispatchPlan → DispatchResultShape the frontend expects."""
-    # Convert [[lat, lng], ...] → [[lng, lat], ...] for MapLibre
     def to_lnglat(coords):
-        return [[lng, lat] for lat, lng in coords]
+        if not coords:
+            return []
+        result = []
+        for p in coords:
+            if len(p) >= 2:
+                c1, c2 = p[0], p[1]
+                if c1 > 50:  # Already [lng, lat] (73.x, 19.x)
+                    result.append([c1, c2])
+                else:        # [lat, lng] (19.x, 73.x), flip to [lng, lat]
+                    result.append([c2, c1])
+        return result
+
 
     pickup_coords   = to_lnglat(plan.geojson_pickup_route)
     delivery_coords = to_lnglat(plan.geojson_delivery_route)

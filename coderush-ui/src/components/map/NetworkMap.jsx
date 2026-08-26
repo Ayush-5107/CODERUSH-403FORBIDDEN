@@ -172,12 +172,25 @@ export default function NetworkMap({ hospitals = [], ambulances = [], selectedRe
         }
     }
 
+function normalizeCoords(coords) {
+    if (!Array.isArray(coords)) return []
+    return coords.map(pt => {
+        if (!Array.isArray(pt) || pt.length < 2) return pt
+        const [a, b] = pt
+        if (a < 50 && b > 50) return [b, a] // [lat, lng] -> [lng, lat]
+        return [a, b]
+    })
+}
+
     // Derive route coordinates from dispatch plan
-    const pickupCoords = useMemo(() => selectedResult?.pickupRoute ?? [], [selectedResult])
-    const deliveryCoords = useMemo(() => selectedResult?.deliveryRoute ?? [], [selectedResult])
+    const rawPickupCoords = useMemo(() => selectedResult?.pickupRoute ?? [], [selectedResult])
+    const rawDeliveryCoords = useMemo(() => selectedResult?.deliveryRoute ?? [], [selectedResult])
+    const pickupCoords = useMemo(() => normalizeCoords(rawPickupCoords), [rawPickupCoords])
+    const deliveryCoords = useMemo(() => normalizeCoords(rawDeliveryCoords), [rawDeliveryCoords])
 
     const [realPickupCoords, setRealPickupCoords] = useState([])
     const [realDeliveryCoords, setRealDeliveryCoords] = useState([])
+
     const [isSnapping, setIsSnapping] = useState(false)
 
     // Patient location coordinates
