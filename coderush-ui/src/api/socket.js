@@ -1,4 +1,5 @@
-const WS_URL = import.meta.env.VITE_WS_URL || 'wss://coderush-403forbidden.onrender.com/ws'
+const WS_URL = import.meta.env.VITE_WS_URL || 'wss://pulseroute-f95d.onrender.com/ws'
+
 
 
 /**

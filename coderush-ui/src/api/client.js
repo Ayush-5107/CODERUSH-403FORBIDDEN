@@ -1,4 +1,5 @@
-const BASE_URL = import.meta.env.VITE_API_URL || 'https://coderush-403forbidden.onrender.com'
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://pulseroute-f95d.onrender.com'
+
 
 
 async function request(path, options = {}) {
