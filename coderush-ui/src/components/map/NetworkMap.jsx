@@ -392,25 +392,39 @@ export default function NetworkMap({ hospitals = [], ambulances = [], selectedRe
     // Update GeoJSON route data on map
     useEffect(() => {
         const map = mapRef.current
-        if (!map || !mapInstance || !map.isStyleLoaded()) return
+        if (!map || !mapInstance) return
 
         const updateSourceData = (sourceId, coords) => {
-            const src = map.getSource(sourceId)
-            if (src) {
-                src.setData({
-                    type: 'Feature',
-                    geometry: {
-                        type: 'LineString',
-                        coordinates: coords.length >= 2 ? coords : []
-                    }
-                })
+            try {
+                const src = map.getSource(sourceId)
+                if (src) {
+                    src.setData({
+                        type: 'Feature',
+                        geometry: {
+                            type: 'LineString',
+                            coordinates: coords.length >= 2 ? coords : []
+                        }
+                    })
+                }
+            } catch (err) {
+                console.warn('[MapRoute] Source update deferred:', err)
             }
         }
 
-        updateSourceData('pickup-route', displayPickupCoords)
-        updateSourceData('delivery-route', displayDeliveryCoords)
-        updateSourceData('fallback-route', !hasGraphRoute ? straightLine : [])
+        const applyData = () => {
+            updateSourceData('pickup-route', displayPickupCoords)
+            updateSourceData('delivery-route', displayDeliveryCoords)
+            updateSourceData('fallback-route', !hasGraphRoute ? straightLine : [])
+        }
+
+        applyData()
+
+        map.on('styledata', applyData)
+        return () => {
+            map.off('styledata', applyData)
+        }
     }, [mapInstance, displayPickupCoords, displayDeliveryCoords, straightLine, hasGraphRoute])
+
 
     // Animated dash flow for the pickup route (Ambulance -> Patient)
     useEffect(() => {
