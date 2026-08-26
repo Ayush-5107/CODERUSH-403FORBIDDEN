@@ -1,7 +1,7 @@
 # ❤️ PulseRoute: Emergency Dispatch Engine
 ### *Real-Time Rural Healthcare Routing & Multi-Constraint Resource Allocation*
 
-![PulseRoute System Overview](docs/images/pulseroute_dashboard_v2.jpg)
+![PulseRoute System Overview](docs/images/pulseroute_dashboard_v3.jpg)
 
 > **Problem Statement Solution**: An enterprise-grade, high-performance full-stack web application powered by a logarithmically-optimized C++20 algorithmic core for dynamic emergency dispatch, multi-criteria hospital selection, and ambulance fleet scheduling across complex rural health networks.
 
@@ -12,25 +12,25 @@
 PulseRoute combines real-time map visualization, graph telemetry, and cost transparency into an intuitive command center for hospital emergency department directors and regional dispatchers.
 
 ### 1. Command Center & Dispatch Dashboard
-![PulseRoute Command Center Dashboard](docs/images/pulseroute_dashboard_v2.jpg)
+![PulseRoute Command Center Dashboard](docs/images/pulseroute_dashboard_v3.jpg)
 *Real-time emergency requests queue (Ghoti, Peth, Niphad, Chandwad), live ambulance fleet active meters (2/5, 3/5 Active), dark-mode map visualizer, trip duration breakdowns, and hospital capacity meters (Nashik District Hospital).*
 
 ---
 
 ### 2. Dynamic Dual-Route Map Visualizer & SLA Enforcement
-![PulseRoute Dual-Route Map Visualizer](docs/images/pulseroute_route_map_v2.jpg)
+![PulseRoute Dual-Route Map Visualizer](docs/images/pulseroute_route_map_v3.jpg)
 *Visualizing the dual-leg dispatch journey: 🟡 **Ambulance $\rightarrow$ Patient (Dispatch Route)** (Orange dashed line: 31 mins) and 🟢 **Patient $\rightarrow$ Hospital (Transport Route)** (Green solid line: 33 mins) with live queue delay tracking (20 mins) and enforced 60-minute SLA window deadlines.*
 
 ---
 
 ### 3. Graph Telemetry & Algorithm Node Exploration Panel
-![PulseRoute Graph Telemetry Panel](docs/images/pulseroute_telemetry_v2.jpg)
+![PulseRoute Graph Telemetry Panel](docs/images/pulseroute_telemetry_v3.jpg)
 *Deep algorithmic transparency displaying exact graph exploration metrics: 1,087 Pickup Nodes, 464 Transport Nodes, 1,549 Total Road Segments explored by Dijkstra / A\* for critical trauma and cardiology emergencies.*
 
 ---
 
 ### 4. Decision Log & Cost Transparency Panel
-![PulseRoute Decision Audit Log](docs/images/pulseroute_decision_log_v2.jpg)
+![PulseRoute Decision Audit Log](docs/images/pulseroute_decision_log_v3.jpg)
 *Complete clinical audit breadcrumbs detailing why specific facilities were approved or rejected (e.g., `[REJECTED] Igatpuri Primary Health: Lacks required specialist (TRAUMA). Available: ['GENERAL_SURGERY', 'PEDIATRICS']` vs `[APPROVED] Nashik District Hospital: total=83.5min`).*
 
 ---
@@ -164,7 +164,7 @@ PulseRoute features a built-in benchmark runner comparing node exploration effic
 ```
 rural_health_engine/
 ├── docs/
-│   └── images/             # High-Resolution PulseRoute UI Screenshots (v2)
+│   └── images/             # PulseRoute UI Screenshots (v3)
 ├── models.hpp              # Data structures (Node, Edge, Hospital, Ambulance, DispatchResult, AlgorithmBenchmark)
 ├── graph_engine.hpp        # Dijkstra, A*, Bidirectional Dijkstra, & Benchmark Runner
 ├── dispatch_engine.hpp     # 4-Phase multi-criteria evaluator & decision log breadcrumbs
