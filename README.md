@@ -1,6 +1,37 @@
-# 🚑 CodeRush 403 Forbidden: Rural Healthcare Intelligent Dispatch & Routing Engine
+# ❤️ PulseRoute: Emergency Dispatch Engine
+### *Real-Time Rural Healthcare Routing & Multi-Constraint Resource Allocation*
 
-> **System Purpose**: An enterprise-grade, high-performance C++20 dynamic routing, hospital selection, and resource scheduling engine designed for emergency healthcare management and hospital network coordination in scale-constrained rural environments.
+![PulseRoute System Overview](docs/images/pulseroute_dashboard.jpg)
+
+> **Problem Statement Solution**: An enterprise-grade, high-performance full-stack web application powered by a logarithmically-optimized C++20 algorithmic core for dynamic emergency dispatch, multi-criteria hospital selection, and ambulance fleet scheduling across complex rural health networks.
+
+---
+
+## 📱 Interactive Web Application Showcase
+
+PulseRoute combines real-time map visualization, graph telemetry, and cost transparency into an intuitive command center for hospital emergency department directors and regional dispatchers.
+
+### 1. Command Center & Dispatch Dashboard
+![PulseRoute Command Center Dashboard](docs/images/pulseroute_dashboard.jpg)
+*Real-time emergency requests queue (Ghoti, Peth, Niphad, Chandwad), live ambulance fleet active meters (2/5, 3/5 Active), dark-mode map visualizer, trip duration breakdowns, and hospital capacity meters (Nashik District Hospital).*
+
+---
+
+### 2. Dynamic Dual-Route Map Visualizer & SLA Enforcement
+![PulseRoute Dual-Route Map Visualizer](docs/images/pulseroute_route_map.jpg)
+*Visualizing the dual-leg dispatch journey: 🟡 **Ambulance $\rightarrow$ Patient (Dispatch Route)** (Orange dashed line: 31 mins) and 🟢 **Patient $\rightarrow$ Hospital (Transport Route)** (Green solid line: 33 mins) with live queue delay tracking (20 mins) and enforced 60-minute SLA window deadlines.*
+
+---
+
+### 3. Graph Telemetry & Algorithm Node Exploration Panel
+![PulseRoute Graph Telemetry Panel](docs/images/pulseroute_telemetry.jpg)
+*Deep algorithmic transparency displaying exact graph exploration metrics: 1,087 Pickup Nodes, 464 Transport Nodes, 1,549 Total Road Segments explored by Dijkstra / A\* for critical trauma and cardiology emergencies.*
+
+---
+
+### 4. Decision Log & Cost Transparency Panel
+![PulseRoute Decision Audit Log](docs/images/pulseroute_decision_log.jpg)
+*Complete clinical audit breadcrumbs detailing why specific facilities were approved or rejected (e.g., `[REJECTED] Igatpuri Primary Health: Lacks required specialist (TRAUMA). Available: ['GENERAL_SURGERY', 'PEDIATRICS']` vs `[APPROVED] Nashik District Hospital: total=83.5min`).*
 
 ---
 
@@ -30,24 +61,9 @@
 
 ---
 
-## 🌟 Core Web App & Simulation Deliverables
-
-```
-┌─────────────────────────────────────────────────────────────────────────────────────────┐
-│                                SYSTEM DELIVERABLES & INTERFACES                         │
-├───────────────────────────────┬───────────────────────────────┬─────────────────────────┤
-│    01 // INTERACTIVE MAP      │     02 // LIVE TELEMETRY      │   03 // DECISION LOG    │
-│  - Real-world road overlays   │  - Real-time queue telemetry  │ - Cost transparency     │
-│  - Animated Dijkstra search   │  - Ambulance fleet tracking   │ - Audit log breadcrumbs │
-│  - Explored tree network mesh │  - Bed/Medicine stock meters  │ - Rejection breakdown   │
-└───────────────────────────────┴───────────────────────────────┴─────────────────────────┘
-```
-
----
-
 ## 📐 Scale, Benchmark Parameters & Constraints
 
-The engine is architected to scale seamlessly across large geographic networks:
+PulseRoute is architected to scale seamlessly across large regional healthcare networks:
 
 - 🟢 **50,000+ Graph Nodes & Coordinates** (Villages, Hospitals, Depots, Road Junctions)
 - 🛣️ **200,000+ Weighted Road Edges** (Speed limits, road surface factors, traffic multipliers)
@@ -60,7 +76,7 @@ The engine is architected to scale seamlessly across large geographic networks:
 
 ## 🏛️ 4-Phase Dispatch Engine Architecture
 
-Instead of blindly picking the geographically nearest hospital, our system executes a **4-Phase Care-Chain Pipeline**:
+Instead of blindly picking the geographically nearest hospital, PulseRoute executes a **4-Phase Care-Chain Pipeline**:
 
 ```
                        PATIENT EMERGENCY REQUEST
@@ -96,25 +112,25 @@ Instead of blindly picking the geographically nearest hospital, our system execu
 
 ---
 
-## 🏆 Hackathon & Hospital Demo Scenario
+## 🏆 Competition & Hospital Demo Scenario
 
 ### Scenario Setup:
-- **Patient Location**: Village Alpha requests urgent Cardiology treatment for acute chest pain.
-- **Hospital B** ($10\text{ km}$ away): Has beds, but **lacks a Cardiologist** $\rightarrow$ **REJECTED** 🚨.
+- **Patient Location**: Village Alpha / Trimbakeshwar requests urgent Cardiology treatment for acute chest pain.
+- **Igatpuri Primary Health** ($10\text{ km}$ away): Has beds, but **lacks a Trauma Specialist** $\rightarrow$ **REJECTED** 🚨.
 - **Hospital A** ($12\text{ km}$ away): Has a Cardiology department, but **0 beds available (10/10 full)** $\rightarrow$ **REJECTED** 🚨.
-- **Hospital C** ($25\text{ km}$ away): Has an **on-duty Cardiologist, open beds (12/25), and Epinephrine stock** $\rightarrow$ **APPROVED** ✅.
+- **Nashik District Hospital** ($25\text{ km}$ away): Has an **on-duty Cardiologist, open beds (8 beds free), and Epinephrine stock** $\rightarrow$ **APPROVED** ✅.
 
 ### Engine Output:
-1. Skips Hospital B and Hospital A despite shorter distances.
-2. Routes directly to **Hospital C**.
-3. Dispatches the nearest idle ambulance (**AMB-101**).
-4. Generates decision breakdown breadcrumbs explaining rejection reasons for B and A.
+1. Skips nearest centers due to specialist or bed capacity constraints.
+2. Routes directly to **Nashik District Hospital**.
+3. Dispatches the nearest idle ambulance.
+4. Displays real-time decision breakdown breadcrumbs explaining rejection reasons in the Decision Log panel.
 
 ---
 
 ## 🛡️ Critical Edge Cases & Hospital Resilience Testing
 
-Our backend handles critical real-world failure modes:
+PulseRoute handles critical real-world failure modes:
 
 | Edge Case | Engine Behavior & Clinical Resilience |
 | :--- | :--- |
@@ -128,7 +144,7 @@ Our backend handles critical real-world failure modes:
 
 ## 📊 Live Algorithm Benchmark Suite
 
-The engine features a built-in benchmark runner comparing node exploration efficiency across algorithms for the exact same patient request:
+PulseRoute features a built-in benchmark runner comparing node exploration efficiency across algorithms for the exact same patient request:
 
 ```json
 "algorithm_benchmarks": {
@@ -147,6 +163,8 @@ The engine features a built-in benchmark runner comparing node exploration effic
 
 ```
 rural_health_engine/
+├── docs/
+│   └── images/             # PulseRoute UI Showcase Screenshots
 ├── models.hpp              # Data structures (Node, Edge, Hospital, Ambulance, DispatchResult, AlgorithmBenchmark)
 ├── graph_engine.hpp        # Dijkstra, A*, Bidirectional Dijkstra, & Benchmark Runner
 ├── dispatch_engine.hpp     # 4-Phase multi-criteria evaluator & decision log breadcrumbs
@@ -161,36 +179,22 @@ rural_health_engine/
 
 ## 💻 Setup & Execution Guide
 
-### Prerequisites
-- **GCC / G++ 10+** (C++20 support required)
-- Windows MinGW / MSYS2 or Linux/macOS
-
-### 1. Compile C++ Backend Server
+### 1. Run C++ Backend Server
 ```powershell
+# Compile C++ Server (Windows GCC)
 g++ -std=c++20 -Iinclude main.cpp -o server.exe -lws2_32
-```
 
-### 2. Run C++ Server
-```powershell
+# Execute Server (Listens on http://localhost:8000)
 .\server.exe
 ```
-*(Listening on `http://localhost:8000`)*
 
----
+### 2. Run Frontend Web Application
+```bash
+# Install dependencies
+npm install
 
-## 📡 REST API Quickstart
-
-### Dispatch Request (`POST http://localhost:8000/api/emergency`)
-```json
-{
-  "village_node_id": "Village_Alpha",
-  "patient_name": "John Doe",
-  "required_specialty": "CARDIOLOGY",
-  "urgency_tier": 1,
-  "required_medicines": {
-    "Epinephrine": 1
-  }
-}
+# Start development server
+npm run dev
 ```
 
 ---
@@ -198,5 +202,5 @@ g++ -std=c++20 -Iinclude main.cpp -o server.exe -lws2_32
 ## 📜 License & Credits
 
 Built for **CodeRush Hackathon** by **Team 403 Forbidden**.
-- **Backend Architecture & Clinical Routing Engine**: Abhishek Yadav (`@AbhishekkYad`)
-- **Frontend & Integration**: Ayush (`@Ayush-5107`)
+- **Backend Architecture & Algorithmic Engine**: Abhishek Yadav (`@AbhishekkYad`)
+- **Frontend Web Application & UI**: Ayush (`@Ayush-5107`)
