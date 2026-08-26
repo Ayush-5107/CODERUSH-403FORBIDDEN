@@ -1,18 +1,40 @@
 # 🚑 CodeRush 403 Forbidden: Rural Healthcare Intelligent Dispatch & Routing Engine
 
-> **Problem Statement Solution**: An enterprise-grade, high-performance C++20 dynamic routing, hospital selection, and resource scheduling engine designed to solve emergency healthcare dispatch in scale-constrained rural environments.
+> **System Purpose**: An enterprise-grade, high-performance C++20 dynamic routing, hospital selection, and resource scheduling engine designed for emergency healthcare management and hospital network coordination in scale-constrained rural environments.
 
 ---
 
-## 🌟 Executive Summary & Deliverables
+## 🏥 Hospital Administration & Clinical Governance Executive Summary
 
-Our solution combines a **logarithmically-optimized C++20 algorithmic core** with a **real-time interactive web visualizer** to handle complex rural health emergencies under strict SLAs, dynamic road blockages, and resource constraints.
-
-### 🎯 Core Web App & Simulation Deliverables
+*Designed for Hospital Evaluators, Emergency Department (ED) Directors, and Health System Administrators:*
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
-│                                SYSTEM ARCHITECTURE & DELIVERABLES                       │
+│                    CLINICAL GOVERNANCE & HOSPITAL VALUE PROPOSITION                     │
+├───────────────────────────────┬───────────────────────────────┬─────────────────────────┤
+│  01 // PATIENT TRIAGE SAFETY  │   02 // CAPACITY BALANCING    │ 03 // AUDIT TRANSPARENCY│
+│ - Zero transfer delays        │ - Prevents ER overcrowding    │ - 100% auditable logs   │
+│ - On-duty specialist matching │ - Real-time bed tracking      │ - Zero black-box risks  │
+│ - Verified drug stock levels  │ - Queue delay optimization    │ - Full clinical governance│
+└───────────────────────────────┴───────────────────────────────┴─────────────────────────┘
+```
+
+1. **Patient Clinical Safety & Specialist Verification**:
+   - Eliminates dangerous secondary inter-hospital transfers by verifying on-duty medical specialists (Cardiology, Trauma, Pediatrics, Surgery) *before* ambulance dispatch.
+2. **Hospital Resource Protection & Capacity Load Balancing**:
+   - Protects Emergency Departments from sudden overcrowding by incorporating real-time bed capacity meters and ED triage queue delays into dispatch scoring.
+3. **Critical Pharmacy & Inventory Preservation**:
+   - Validates hospital pharmacy stock for required emergency medications (e.g., Epinephrine, Aspirin, Morphine) prior to routing, preventing arrivals at under-stocked facilities.
+4. **Full Auditability & Zero "Black-Box" Risk**:
+   - Every single dispatch generates an immutable **Decision Audit Log Breadcrumb**, providing hospital leadership with complete transparency on why facilities were approved or bypassed.
+
+---
+
+## 🌟 Core Web App & Simulation Deliverables
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                SYSTEM DELIVERABLES & INTERFACES                         │
 ├───────────────────────────────┬───────────────────────────────┬─────────────────────────┤
 │    01 // INTERACTIVE MAP      │     02 // LIVE TELEMETRY      │   03 // DECISION LOG    │
 │  - Real-world road overlays   │  - Real-time queue telemetry  │ - Cost transparency     │
@@ -74,7 +96,7 @@ Instead of blindly picking the geographically nearest hospital, our system execu
 
 ---
 
-## 🏆 Hackathon Competition Demo Scenario
+## 🏆 Hackathon & Hospital Demo Scenario
 
 ### Scenario Setup:
 - **Patient Location**: Village Alpha requests urgent Cardiology treatment for acute chest pain.
@@ -90,11 +112,11 @@ Instead of blindly picking the geographically nearest hospital, our system execu
 
 ---
 
-## 🛡️ Critical Edge Cases & Resilience Testing
+## 🛡️ Critical Edge Cases & Hospital Resilience Testing
 
 Our backend handles critical real-world failure modes:
 
-| Edge Case | Engine Behavior & Resilience |
+| Edge Case | Engine Behavior & Clinical Resilience |
 | :--- | :--- |
 | **No Direct Road Route** | Detects graph disconnects and returns an `UNSERVICEABLE` alert with fallback instructions |
 | **Specialist Unavailable** | Automatically skips nearest clinic and routes to next qualified regional medical center |
@@ -117,7 +139,7 @@ The engine features a built-in benchmark runner comparing node exploration effic
 }
 ```
 
-> **Judge Pitch**: *"A\* and Bidirectional Dijkstra explore significantly fewer nodes because geographic heuristics guide the search directly toward feasible targets, reducing CPU overhead during high-concurrency patient influxes."*
+> **Evaluation Metric**: *"A\* and Bidirectional Dijkstra explore significantly fewer nodes because geographic heuristics guide the search directly toward feasible targets, reducing CPU overhead during high-concurrency patient influxes."*
 
 ---
 
@@ -132,7 +154,7 @@ rural_health_engine/
 ├── main.cpp                # CORS-enabled C++ HTTP REST API server
 ├── test_cpp.cpp            # Test suite for routing & benchmark validation
 ├── API_DOCUMENTATION.md    # Complete frontend API specification & JS fetch snippets
-└── README.md               # Master project overview
+└── README.md               # Master project overview & clinical governance guide
 ```
 
 ---
@@ -176,5 +198,5 @@ g++ -std=c++20 -Iinclude main.cpp -o server.exe -lws2_32
 ## 📜 License & Credits
 
 Built for **CodeRush Hackathon** by **Team 403 Forbidden**.
-- **Backend Architecture**: Abhishek Yadav (`@AbhishekkYad`)
+- **Backend Architecture & Clinical Routing Engine**: Abhishek Yadav (`@AbhishekkYad`)
 - **Frontend & Integration**: Ayush (`@Ayush-5107`)
