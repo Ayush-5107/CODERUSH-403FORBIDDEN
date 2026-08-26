@@ -253,14 +253,26 @@ function normalizeCoords(coords) {
     // Fallback route when graph route isn't available
     const straightLine = useMemo(() => {
         if (pickupCoords.length >= 2 || deliveryCoords.length >= 2) return []
-        if (!selectedResult?.route) return []
-        const { ambulanceId, patientLat, patientLng, hospitalId } = selectedResult.route
-        const ambo = ambulances.find(a => a.id === ambulanceId)
-        const hosp = hospitals.find(h => h.id === hospitalId)
-        if (!ambo || !hosp || patientLat == null) return []
+        let ambo = null, hosp = null, patientLat = null, patientLng = null
+
+        if (selectedResult?.route) {
+            const { ambulanceId, patientLat: pLat, patientLng: pLng, hospitalId } = selectedResult.route
+            patientLat = pLat
+            patientLng = pLng
+            ambo = ambulances.find(a => a.id === ambulanceId)
+            hosp = hospitals.find(h => h.id === hospitalId)
+        } else if (selectedRequest && selectedRequest.lat != null && selectedRequest.lng != null) {
+            patientLat = selectedRequest.lat
+            patientLng = selectedRequest.lng
+            ambo = ambulances.find(a => a.status === 'available') || ambulances[0]
+            hosp = hospitals[0]
+        }
+
+        if (!ambo || !hosp || patientLat == null || patientLng == null) return []
         const rawLine = [[ambo.lng, ambo.lat], [patientLng, patientLat], [hosp.lng, hosp.lat]]
         return generateSmoothCurve(rawLine)
-    }, [selectedResult, ambulances, hospitals, pickupCoords, deliveryCoords])
+    }, [selectedResult, selectedRequest, ambulances, hospitals, pickupCoords, deliveryCoords])
+
 
     const hasGraphRoute = pickupCoords.length >= 2 || deliveryCoords.length >= 2
     const routeStatus = !selectedResult ? 'idle'
